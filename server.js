@@ -178,26 +178,29 @@
 //   console.log("Listening on port 3000");
 // });
 // ---------------------------------------------------------------------- //
-// const express = require("express");
-// const app = express();
-// const db = require("./db");
+const express = require("express");
+const app = express();
+const db = require("./db");
+require('dotenv').config();
 
-// const bodyParser = require("body-parser");
-// app.use(bodyParser.json());
+const bodyParser = require("body-parser");
+app.use(bodyParser.json());
 
-// app.get("/", (req, res) => {
-//   res.send("Welcome to our hotel!");
-// });
+app.get("/", (req, res) => {
+  res.send("Welcome to our hotel!");
+});
 
-// // Import the router files
-// const personRoutes = require("./routes/personRoutes");
-// // Use the routers
-// app.use("/person", personRoutes);
+// Import the router files
+const personRoutes = require("./routes/personRoutes");
+// Use the routers
+app.use("/person", personRoutes);
 
-// const menuRoutes = require("./routes/menuRoutes");
-// app.use("/menu", menuRoutes);
+const menuRoutes = require("./routes/menuRoutes");
+app.use("/menu", menuRoutes);
 
-// app.listen(3000, () => {
-//   console.log("Listening on port 3000");
-// });
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}`);
+});
 // ---------------------------------------------------------------------- //
