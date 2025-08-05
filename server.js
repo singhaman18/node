@@ -244,42 +244,60 @@
 //   console.log(`Listening on port ${PORT}`);
 // });
 // ---------------------------------------------------------------------- //
+// const express = require("express");
+// const app = express();
+// const db = require("./db");
+// require("dotenv").config();
+// const passport = require("./auth");
+// app.use(express.json());
+
+// const bodyParser = require("body-parser");
+// app.use(bodyParser.json());
+
+// // Middleware Function
+// const logRequest = (req, res, next) => {
+//   console.log(
+//     `[${new Date().toLocaleString()}] Request made to : ${req.originalUrl}`
+//   );
+//   next();
+// };
+
+// app.use(logRequest);
+
+// app.use(passport.initialize());
+// const localAuthMiddleware = passport.authenticate("local", { session: false });
+
+// app.get("/", (req, res) => {
+//   res.send("Welcome to our hotel!");
+// });
+
+// // Import the router files
+// const personRoutes = require("./routes/personRoutes");
+// // Use the routers
+// app.use("/person", personRoutes);
+
+// const menuRoutes = require("./routes/menuRoutes");
+// app.use("/menu", menuRoutes);
+
+// const PORT = process.env.PORT || 3000;
+
+// app.listen(process.env.PORT || 3000, () => {
+//   console.log(`Listening on port ${PORT}`);
+// });
+// ---------------------------------------------------------------------- //
 const express = require("express");
 const app = express();
 const db = require("./db");
 require("dotenv").config();
-const passport = require("./auth");
-app.use(express.json());
+app.use(express.json())
 
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
-
-// Middleware Function
-const logRequest = (req, res, next) => {
-  console.log(
-    `[${new Date().toLocaleString()}] Request made to : ${req.originalUrl}`
-  );
-  next();
-};
-
-app.use(logRequest);
-
-app.use(passport.initialize());
-const localAuthMiddleware = passport.authenticate("local", { session: false });
-
-app.get("/", (req, res) => {
-  res.send("Welcome to our hotel!");
-});
-
-// Import the router files
-const personRoutes = require("./routes/personRoutes");
-// Use the routers
-app.use("/person", personRoutes);
-
-const menuRoutes = require("./routes/menuRoutes");
-app.use("/menu", menuRoutes);
-
 const PORT = process.env.PORT || 3000;
+
+const internRoutes = require("./routes/internRoutes");
+
+app.use("/intern", internRoutes);
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(`Listening on port ${PORT}`);
